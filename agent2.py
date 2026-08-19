@@ -15,7 +15,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-st.title("⚡ My Custom AI Agent")
+st.title("⚡ Aro AI Agent")
 st.write("Welcome! This AI app was built solo with Python and Gemini.")
 
 @st.cache_resource
