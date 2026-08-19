@@ -3,8 +3,6 @@ from google import genai
 
 st.set_page_config(page_title="Aro AI", page_icon="⚡", layout="centered")
 
-API_KEY = st.secrets["GEMINI_API_KEY"]
-
 st.markdown(
     """
     <style>
@@ -26,7 +24,7 @@ st.write("Welcome! This AI app was built solo with Python and Gemini.")
 
 @st.cache_resource
 def get_ai_client():
-    return genai.Client(api_key=API_KEY)
+    return genai.Client(api_key=st.secrets["GEMINI_API_KEY"])
 
 
 client = get_ai_client()
@@ -56,7 +54,7 @@ if user_question := st.chat_input("Ask me anything..."):
                 message_placeholder.markdown(full_response + "▌")
             message_placeholder.markdown(full_response)
         except Exception as e:
-            full_response = f"Configuration Error: Verify API connection strings! ({str(e)})"
+            full_response = f"Configuration Error: {str(e)}"
             message_placeholder.markdown(full_response)
 
     st.session_state.messages.append({"role": "assistant", "content": full_response})
