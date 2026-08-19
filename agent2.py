@@ -49,7 +49,7 @@ if user_question := st.chat_input("Ask me anything..."):
 
         try:
             response_stream = client.models.generate_content_stream(
-                model="gemini-2.5-flash", contents=user_question
+                model="models/gemini-3.6-flash", contents=user_question
             )
             for chunk in response_stream:
                 full_response += chunk.text
