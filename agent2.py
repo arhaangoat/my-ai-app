@@ -1,71 +1,57 @@
-import sys
-import requests
+import streamlit as st
 from google import genai
+
+st.set_page_config(page_title="Custom AI Assistant", page_icon="⚡", layout="centered")
 
 API_KEY = "AQ.Ab8RN6J-uANsFqHt-Ju5MeGLpnyNmE8mxB-4_4tM1eOeY3HxfQ"
 
-
-def search_wikipedia(query):
-    url = "https://wikipedia.org"
-    params = {
-        "action": "query",
-        "format": "json",
-        "list": "search",
-        "srsearch": query,
-        "utf8": 1,
-    }
-    try:
-        response = requests.get(url, params=params, timeout=5).json()
-        search_results = response.get("query", {}).get("search", [])
-
-        if not search_results:
-            return "No matching Wikipedia articles found."
-
-        snippet = search_results["snippet"]
-        clean_text = snippet.replace('<span class="searchmatch">', "").replace(
-            "</span>", ""
-        )
-        return clean_text
-    except Exception:
-        return "Local network blocked Wikipedia. Use your internal knowledge base to answer."
-
-
-# Initialize the AI Client once outside the loop
-client = genai.Client(api_key=API_KEY)
-
-print("--- AI Agent Started (Type 'exit' or 'quit' to close) ---")
-while True:
-    print("\n" + "=" * 40)
-    user_question = input("Ask your AI anything: ")
-
-    if user_question.lower() in ["exit", "quit"]:
-        print("Goodbye!")
-        break
-
-    print("🔍 Searching the web for sources...")
-    live_facts = search_wikipedia(user_question)
-
-    prompt_with_context = f"""
-    You are a helpful AI assistant. 
-    Answer the user's question accurately. If the live facts say 'Local network blocked Wikipedia', answer using your own knowledge.
-
-    Live Facts:
-    "{live_facts}"
-
-    User Question: {user_question}
-    Answer:
+st.markdown(
     """
+    <style>
+    .stApp { background-color: #0e1117; color: #ffffff; }
+    h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
-    print("🤖 AI is thinking...")
-    print("\n✨ Response: ", end="")
+st.title("⚡ My Custom AI Agent")
+st.write("Welcome! This AI app was built solo with Python and Gemini.")
 
-    # generate_content_stream streams words live as they are built!
-    response_stream = client.models.generate_content_stream(
-        model="models/gemini-3.6-flash", contents=prompt_with_context
-    )
+@st.cache_resource
+def get_ai_client():
+    return genai.Client(api_key=API_KEY)
 
-    for chunk in response_stream:
-        print(chunk.text, end="")
-        sys.stdout.flush()
+client = get_ai_client()
 
-    print() 
+if "messages" not in st.session_state:
+    st.session_state.messages = []
+
+# Display conversion log history blocks
+for message in st.session_state.messages:
+    with st.chat_message(message["role"]):
+        st.markdown(message["content"])
+
+if user_question := st.chat_input("Ask me anything..."):
+    with st.chat_message("user"):
+        st.markdown(user_question)
+    st.session_state.messages.append({"role": "user", "content": user_question})
+
+    with st.chat_message("assistant"):
+        message_placeholder = st.empty()
+        full_response = ""
+        
+        try:
+            response_stream = client.models.generate_content_stream(
+                model="models/gemini-2.5-flash",
+                contents=user_question
+            )
+            for chunk in response_stream:
+                full_response += chunk.text
+                message_placeholder.markdown(full_response + "▌")
+            message_placeholder.markdown(full_response)
+        except Exception as e:
+            full_response = f"Configuration Error: Verify API connection strings! ({str(e)})"
+            message_placeholder.markdown(full_response)
+            
+    st.session_state.messages.append({"role": "assistant", "content": full_response})
