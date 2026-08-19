@@ -3,7 +3,7 @@ from google import genai
 
 st.set_page_config(page_title="Custom AI Assistant", page_icon="⚡", layout="centered")
 
-API_KEY = "AQ.Ab8RN6J-uANsFqHt-Ju5MeGLpnyNmE8mxB-4_4tM1eOeY3HxfQ"
+API_KEY = "AQ.Ab8RN6LGRjaywIAEjqmLbSq6cC0cJurkFPLg_SvnEsxaW4thvw"
 
 st.markdown(
     """
