@@ -8,9 +8,16 @@ API_KEY = "AQ.Ab8RN6J-uANsFqHt-Ju5MeGLpnyNmE8mxB-4_4tM1eOeY3HxfQ"
 st.markdown(
     """
     <style>
+    /* Make the base app background dark */
     .stApp { background-color: #0e1117; color: #ffffff; }
     h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
-    input { color: #000000 !important; }
+    
+    /* TARGET STREAMLIT CHAT BAR: Turn it dark gray and make typing text crisp white */
+    [data-testid="stChatInput"] textarea {
+        background-color: #262730 !important;
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
