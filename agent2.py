@@ -10,11 +10,24 @@ st.markdown(
     .stApp { background-color: #0e1117; color: #ffffff; }
     h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
     
-    /* CHAT INPUT BAR: Full pitch black background, crisp white text */
+    /* CHAT INPUT BAR: Pure white container, jet black text */
     [data-testid="stChatInput"] textarea {
-        background-color: #000000 !important;
-        color: #ffffff !important;
-        -webkit-text-fill-color: #ffffff !important;
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        -webkit-text-fill-color: #000000 !important;
+    }
+    
+    /* CHAT INPUT CONTAINER: Force the parent box border to stand out cleanly */
+    [data-testid="stChatInput"] {
+        background-color: #ffffff !important;
+        border-radius: 12px;
+        padding: 2px;
+    }
+
+    /* Fix the placeholder text ("Ask me anything...") color to be a readable dark gray */
+    [data-testid="stChatInput"] textarea::placeholder {
+        color: #555555 !important;
+        -webkit-text-fill-color: #555555 !important;
     }
     
     /* CHAT MESSAGES TEXT: Force every single letter inside response blocks to be bright readable white */
