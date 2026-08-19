@@ -10,9 +10,9 @@ st.markdown(
     .stApp { background-color: #0e1117; color: #ffffff; }
     h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
     
-    /* CHAT INPUT BAR: Dark gray container, crisp white text */
+    /* CHAT INPUT BAR: Full pitch black background, crisp white text */
     [data-testid="stChatInput"] textarea {
-        background-color: #262730 !important;
+        background-color: #000000 !important;
         color: #ffffff !important;
         -webkit-text-fill-color: #ffffff !important;
     }
@@ -23,13 +23,13 @@ st.markdown(
         -webkit-text-fill-color: #ffffff !important;
     }
     
-    /* USER MESSAGE CONTAINER: Give it a distinct blue tint box */
+    /* USER MESSAGE CONTAINER: Distinct dark blue tint box */
     [data-testid="stChatMessageUser"] {
         background-color: #1e293b !important;
         border-radius: 12px;
     }
     
-    /* AI ASSISTANT MESSAGE CONTAINER: Give it a distinct dark gray box */
+    /* AI ASSISTANT MESSAGE CONTAINER: Distinct dark gray box */
     [data-testid="stChatMessageAssistant"] {
         background-color: #262730 !important;
         border-radius: 12px;
