@@ -10,6 +10,7 @@ st.markdown(
     <style>
     .stApp { background-color: #0e1117; color: #ffffff; }
     h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
+    input { color: #000000 !important; }
     </style>
     """,
     unsafe_allow_html=True,
