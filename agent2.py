@@ -51,7 +51,7 @@ if user_question := st.chat_input("Ask me anything..."):
         
         try:
             response_stream = client.models.generate_content_stream(
-                model="models/gemini-2.5-flash",
+                model="gemini-2.5-flash",
                 contents=user_question
             )
             for chunk in response_stream:
