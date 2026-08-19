@@ -6,18 +6,38 @@ st.set_page_config(page_title="Aro AI", page_icon="⚡", layout="centered")
 st.markdown(
     """
     <style>
+    /* App base background styling */
     .stApp { background-color: #0e1117; color: #ffffff; }
     h1 { color: #00f2fe; text-align: center; font-family: 'Helvetica Neue', sans-serif; }
+    
+    /* CHAT INPUT BAR: Dark gray container, crisp white text */
     [data-testid="stChatInput"] textarea {
         background-color: #262730 !important;
         color: #ffffff !important;
         -webkit-text-fill-color: #ffffff !important;
     }
+    
+    /* CHAT MESSAGES TEXT: Force every single letter inside response blocks to be bright readable white */
+    .stChatMessage p, .stChatMessage span, .stChatMessage div {
+        color: #ffffff !important;
+        -webkit-text-fill-color: #ffffff !important;
+    }
+    
+    /* USER MESSAGE CONTAINER: Give it a distinct blue tint box */
+    [data-testid="stChatMessageUser"] {
+        background-color: #1e293b !important;
+        border-radius: 12px;
+    }
+    
+    /* AI ASSISTANT MESSAGE CONTAINER: Give it a distinct dark gray box */
+    [data-testid="stChatMessageAssistant"] {
+        background-color: #262730 !important;
+        border-radius: 12px;
+    }
     </style>
     """,
     unsafe_allow_html=True,
 )
-
 st.title("⚡ Aro AI Agent")
 st.write("Welcome! This AI app was built solo with Python and Gemini.")
 
