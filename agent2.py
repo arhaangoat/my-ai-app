@@ -3,7 +3,7 @@ from google import genai
 
 st.set_page_config(page_title="Custom AI Assistant", page_icon="⚡", layout="centered")
 
-API_KEY = st.secrets["AQ.Ab8RN6LGRjaywIAEjqmLbSq6cC0cJurkFPLg_SvnEsxaW4thvw"]
+API_KEY = st.secrets["GEMINI_API_KEY"]
 
 st.markdown(
     """
